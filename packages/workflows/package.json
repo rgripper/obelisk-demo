@@ -1,0 +1,17 @@
+{
+  "name": "@obelisk-demo/workflows",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc && bun run build:wasm",
+    "build:wasm": "jco componentize dist/index.js --wit ../wit/world.wit --world-name ticket-workflow --out dist/ticket-resolution.wasm",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@obelisk-demo/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@bytecodealliance/jco": "^1.4.0",
+    "typescript": "^5.7.2"
+  }
+}

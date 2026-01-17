@@ -1,0 +1,31 @@
+// AI Activity Interfaces
+package obelisk:ai-activities@0.1.0;
+
+use obelisk:demo/types@0.1.0.{analysis-result, knowledge-entry, error};
+
+// Analyze ticket activity - extracts intent, sentiment, urgency
+world analyze-ticket {
+    import wasi:io/poll@0.2.0;
+    import wasi:http/outgoing-handler@0.2.0;
+
+    // Main export: analyze ticket text with idempotency
+    export analyze: func(ticket-text: string, idempotency-key: string) -> result<analysis-result, error>;
+}
+
+// Knowledge base search activity - semantic search for similar tickets
+world search-kb {
+    import wasi:io/poll@0.2.0;
+    import wasi:http/outgoing-handler@0.2.0;
+
+    // Main export: search knowledge base
+    export search: func(query: string, max-results: u32, idempotency-key: string) -> result<list<knowledge-entry>, error>;
+}
+
+// Response generation activity - creates draft responses using AI
+world generate-response {
+    import wasi:io/poll@0.2.0;
+    import wasi:http/outgoing-handler@0.2.0;
+
+    // Main export: generate response from context
+    export generate: func(context: string, analysis: string, idempotency-key: string) -> result<string, error>;
+}

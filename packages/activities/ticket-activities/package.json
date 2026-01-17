@@ -1,0 +1,19 @@
+{
+  "name": "@obelisk-demo/ticket-activities",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc && bun run build:wasm",
+    "build:wasm": "bun run componentize:fetch && bun run componentize:update",
+    "componentize:fetch": "jco componentize dist/fetch-ticket.js --wit ../../wit/activities/ticket.wit --world-name fetch-ticket --out dist/fetch-ticket.wasm",
+    "componentize:update": "jco componentize dist/update-ticket.js --wit ../../wit/activities/ticket.wit --world-name update-ticket --out dist/update-ticket.wasm",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@obelisk-demo/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@bytecodealliance/jco": "^1.4.0",
+    "typescript": "^5.7.2"
+  }
+}

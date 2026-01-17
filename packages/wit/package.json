@@ -1,0 +1,6 @@
+{
+  "name": "@obelisk-demo/wit",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "WIT (WebAssembly Interface Type) definitions for Obelisk workflows and activities"
+}

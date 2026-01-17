@@ -1,0 +1,68 @@
+// Common type definitions shared across workflows and activities
+package obelisk:demo@0.1.0;
+
+interface types {
+    // Sentiment analysis result
+    enum sentiment-score {
+        positive,
+        neutral,
+        negative,
+    }
+
+    // Urgency level for ticket prioritization
+    enum urgency-level {
+        low,
+        medium,
+        high,
+        critical,
+    }
+
+    // Ticket status in the system
+    enum ticket-status {
+        open,
+        in-progress,
+        waiting-response,
+        resolved,
+        closed,
+    }
+
+    // Result of AI analysis
+    record analysis-result {
+        intent: string,
+        sentiment: sentiment-score,
+        urgency: urgency-level,
+        category: string,
+    }
+
+    // Knowledge base entry from search
+    record knowledge-entry {
+        id: string,
+        title: string,
+        content: string,
+        similarity-score: float32,
+    }
+
+    // Ticket data from external system
+    record ticket-data {
+        id: string,
+        title: string,
+        description: string,
+        customer-email: string,
+        created-at: u64,
+        priority: string,
+    }
+
+    // Final workflow resolution result
+    record resolution {
+        ticket-id: string,
+        status: ticket-status,
+        response: string,
+        execution-time-ms: u64,
+    }
+
+    // Error type for all operations
+    record error {
+        code: string,
+        message: string,
+    }
+}

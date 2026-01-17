@@ -1,0 +1,26 @@
+[
+  {
+    "id": "TICKET-001",
+    "title": "Cannot reset password",
+    "description": "I've been trying to reset my password for the past hour but I'm not receiving the reset email. This is urgent as I need to access my account for an important meeting.",
+    "expectedCategory": "authentication",
+    "expectedUrgency": "critical",
+    "expectedStatus": "in-progress"
+  },
+  {
+    "id": "TICKET-002",
+    "title": "Billing question about invoice",
+    "description": "I received an invoice for $99 but I thought my subscription was $49/month. Can you please clarify this charge?",
+    "expectedCategory": "billing",
+    "expectedUrgency": "medium",
+    "expectedStatus": "resolved"
+  },
+  {
+    "id": "TICKET-003",
+    "title": "Feature request: Dark mode",
+    "description": "Would love to see a dark mode option in the app. Many of us work late hours and it would be easier on the eyes.",
+    "expectedCategory": "feature-request",
+    "expectedUrgency": "low",
+    "expectedStatus": "resolved"
+  }
+]

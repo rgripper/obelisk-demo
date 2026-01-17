@@ -1,0 +1,29 @@
+// Main Workflow World Definition
+package obelisk:workflow@0.1.0;
+
+use obelisk:demo/types@0.1.0.{
+    analysis-result,
+    knowledge-entry,
+    ticket-status,
+    resolution,
+    error
+};
+
+// Ticket Resolution Workflow
+// This workflow orchestrates the ticket resolution process
+// Deterministic - no side effects, only pure orchestration logic
+world ticket-workflow {
+    // Import AI activities
+    import ai-analyze: func(ticket-text: string, idempotency-key: string) -> result<analysis-result, error>;
+    import kb-search: func(query: string, max-results: u32, idempotency-key: string) -> result<list<knowledge-entry>, error>;
+    import generate-response: func(context: string, analysis: string, idempotency-key: string) -> result<string, error>;
+
+    // Import ticket operations
+    import update-ticket: func(ticket-id: string, status: ticket-status, idempotency-key: string) -> result<_, error>;
+
+    // Import notifications
+    import notify-team: func(message: string, channel: string, idempotency-key: string) -> result<_, error>;
+
+    // Main workflow export: process a support ticket
+    export process-ticket: func(ticket-id: string, ticket-text: string) -> result<resolution, error>;
+}

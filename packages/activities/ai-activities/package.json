@@ -1,0 +1,20 @@
+{
+  "name": "@obelisk-demo/ai-activities",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc && bun run build:wasm",
+    "build:wasm": "bun run componentize:analyze && bun run componentize:search && bun run componentize:generate",
+    "componentize:analyze": "jco componentize dist/analyze-ticket.js --wit ../../wit/activities/ai.wit --world-name analyze-ticket --out dist/analyze-ticket.wasm",
+    "componentize:search": "jco componentize dist/search-kb.js --wit ../../wit/activities/ai.wit --world-name search-kb --out dist/search-kb.wasm",
+    "componentize:generate": "jco componentize dist/generate-response.js --wit ../../wit/activities/ai.wit --world-name generate-response --out dist/generate-response.wasm",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@obelisk-demo/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@bytecodealliance/jco": "^1.4.0",
+    "typescript": "^5.7.2"
+  }
+}

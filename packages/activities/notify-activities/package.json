@@ -1,0 +1,17 @@
+{
+  "name": "@obelisk-demo/notify-activities",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc && bun run build:wasm",
+    "build:wasm": "jco componentize dist/notify-team.js --wit ../../wit/activities/notify.wit --world-name notify-team --out dist/notify-team.wasm",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@obelisk-demo/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@bytecodealliance/jco": "^1.4.0",
+    "typescript": "^5.7.2"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "obelisk-demo",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "packages/activities/*"
+  ],
+  "scripts": {
+    "build": "bun run build:workflows && bun run build:activities",
+    "build:workflows": "bun run --cwd packages/workflows build",
+    "build:activities": "bun run --filter 'packages/activities/*' build",
+    "clean": "bun run --filter '*' clean",
+    "typecheck": "tsc --build",
+    "dev": "bun run --watch build"
+  },
+  "devDependencies": {
+    "@bytecodealliance/componentize-js": "^0.10.2",
+    "@bytecodealliance/jco": "^1.4.0",
+    "@types/bun": "latest",
+    "typescript": "^5.7.2"
+  }
+}
