@@ -13,7 +13,7 @@
     "@obelisk-demo/shared": "workspace:*"
   },
   "devDependencies": {
-    "@bytecodealliance/jco": "^1.4.0",
-    "typescript": "^5.7.2"
+    "@bytecodealliance/jco": "catalog:",
+    "typescript": "catalog:"
   }
 }

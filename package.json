@@ -7,6 +7,12 @@
     "packages/*",
     "packages/activities/*"
   ],
+  "catalog": {
+    "@bytecodealliance/componentize-js": "^0.10.2",
+    "@bytecodealliance/jco": "^1.4.0",
+    "@types/bun": "latest",
+    "typescript": "^5.9.3"
+  },
   "scripts": {
     "build": "bun run build:workflows && bun run build:activities",
     "build:workflows": "bun run --cwd packages/workflows build",
@@ -16,9 +22,9 @@
     "dev": "bun run --watch build"
   },
   "devDependencies": {
-    "@bytecodealliance/componentize-js": "^0.10.2",
-    "@bytecodealliance/jco": "^1.4.0",
-    "@types/bun": "latest",
-    "typescript": "^5.9.3"
+    "@bytecodealliance/componentize-js": "catalog:",
+    "@bytecodealliance/jco": "catalog:",
+    "@types/bun": "catalog:",
+    "typescript": "catalog:"
   }
 }
