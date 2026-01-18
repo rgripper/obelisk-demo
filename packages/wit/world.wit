@@ -1,7 +1,7 @@
 // Main Workflow World Definition
 package obelisk:workflow@0.1.0;
 
-use obelisk:demo/types@0.1.0.{
+use obelisk:demo/types.{
     analysis-result,
     knowledge-entry,
     ticket-status,
