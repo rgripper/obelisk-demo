@@ -1,18 +1,68 @@
 // Main Workflow World Definition
 package obelisk:workflow@0.1.0;
 
-use obelisk:demo/types.{
-    analysis-result,
-    knowledge-entry,
-    ticket-status,
-    resolution,
-    error
-};
+interface types {
+    // Sentiment analysis result
+    enum sentiment-score {
+        positive,
+        neutral,
+        negative,
+    }
+
+    // Urgency level for ticket prioritization
+    enum urgency-level {
+        low,
+        medium,
+        high,
+        critical,
+    }
+
+    // Ticket status in the system
+    enum ticket-status {
+        open,
+        in-progress,
+        waiting-response,
+        resolved,
+        closed,
+    }
+
+    // Result of AI analysis
+    record analysis-result {
+        intent: string,
+        sentiment: sentiment-score,
+        urgency: urgency-level,
+        category: string,
+    }
+
+    // Knowledge base entry from search
+    record knowledge-entry {
+        id: string,
+        title: string,
+        content: string,
+        similarity-score: f32,
+    }
+
+    // Final workflow resolution result
+    record resolution {
+        ticket-id: string,
+        status: ticket-status,
+        response: string,
+        execution-time-ms: u64,
+    }
+
+    // Error type for all operations
+    record error {
+        code: string,
+        message: string,
+    }
+}
 
 // Ticket Resolution Workflow
 // This workflow orchestrates the ticket resolution process
 // Deterministic - no side effects, only pure orchestration logic
 world ticket-workflow {
+    use types.{analysis-result, knowledge-entry, ticket-status, resolution, error};
+
     // Import AI activities
     import ai-analyze: func(ticket-text: string, idempotency-key: string) -> result<analysis-result, error>;
     import kb-search: func(query: string, max-results: u32, idempotency-key: string) -> result<list<knowledge-entry>, error>;

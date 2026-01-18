@@ -1,12 +1,16 @@
 // Notification Activity Interfaces
 package obelisk:notify-activities@0.1.0;
 
-use obelisk:demo/types@0.1.0.{error};
+interface types {
+    record error {
+        code: string,
+        message: string,
+    }
+}
 
 // Notify team via Slack/Teams/Email
 world notify-team {
-    import wasi:io/poll@0.2.0;
-    import wasi:http/outgoing-handler@0.2.0;
+    use types.{error};
 
     // Main export: send notification (idempotent)
     export notify: func(message: string, channel: string, idempotency-key: string) -> result<_, error>;

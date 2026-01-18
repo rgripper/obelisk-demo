@@ -1,12 +1,33 @@
 // Ticket System Activity Interfaces
 package obelisk:ticket-activities@0.1.0;
 
-use obelisk:demo/types@0.1.0.{ticket-data, ticket-status, error};
+interface types {
+    enum ticket-status {
+        open,
+        in-progress,
+        waiting-response,
+        resolved,
+        closed,
+    }
+
+    record ticket-data {
+        id: string,
+        title: string,
+        description: string,
+        customer-email: string,
+        created-at: u64,
+        priority: string,
+    }
+
+    record error {
+        code: string,
+        message: string,
+    }
+}
 
 // Fetch ticket data from external system
 world fetch-ticket {
-    import wasi:io/poll@0.2.0;
-    import wasi:http/outgoing-handler@0.2.0;
+    use types.{ticket-data, error};
 
     // Main export: fetch ticket by ID
     export fetch: func(ticket-id: string) -> result<ticket-data, error>;
@@ -14,8 +35,7 @@ world fetch-ticket {
 
 // Update ticket status in external system
 world update-ticket {
-    import wasi:io/poll@0.2.0;
-    import wasi:http/outgoing-handler@0.2.0;
+    use types.{ticket-status, error};
 
     // Main export: update ticket status (idempotent)
     export update: func(ticket-id: string, status: ticket-status, idempotency-key: string) -> result<_, error>;

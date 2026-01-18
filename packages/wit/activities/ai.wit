@@ -1,12 +1,43 @@
 // AI Activity Interfaces
 package obelisk:ai-activities@0.1.0;
 
-use obelisk:demo/types@0.1.0.{analysis-result, knowledge-entry, error};
+interface types {
+    enum sentiment-score {
+        positive,
+        neutral,
+        negative,
+    }
+
+    enum urgency-level {
+        low,
+        medium,
+        high,
+        critical,
+    }
+
+    record analysis-result {
+        intent: string,
+        sentiment: sentiment-score,
+        urgency: urgency-level,
+        category: string,
+    }
+
+    record knowledge-entry {
+        id: string,
+        title: string,
+        content: string,
+        similarity-score: f32,
+    }
+
+    record error {
+        code: string,
+        message: string,
+    }
+}
 
 // Analyze ticket activity - extracts intent, sentiment, urgency
 world analyze-ticket {
-    import wasi:io/poll@0.2.0;
-    import wasi:http/outgoing-handler@0.2.0;
+    use types.{analysis-result, error};
 
     // Main export: analyze ticket text with idempotency
     export analyze: func(ticket-text: string, idempotency-key: string) -> result<analysis-result, error>;
@@ -14,8 +45,7 @@ world analyze-ticket {
 
 // Knowledge base search activity - semantic search for similar tickets
 world search-kb {
-    import wasi:io/poll@0.2.0;
-    import wasi:http/outgoing-handler@0.2.0;
+    use types.{knowledge-entry, error};
 
     // Main export: search knowledge base
     export search: func(query: string, max-results: u32, idempotency-key: string) -> result<list<knowledge-entry>, error>;
@@ -23,8 +53,7 @@ world search-kb {
 
 // Response generation activity - creates draft responses using AI
 world generate-response {
-    import wasi:io/poll@0.2.0;
-    import wasi:http/outgoing-handler@0.2.0;
+    use types.{error};
 
     // Main export: generate response from context
     export generate: func(context: string, analysis: string, idempotency-key: string) -> result<string, error>;

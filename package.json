@@ -10,7 +10,7 @@
   "scripts": {
     "build": "bun run build:workflows && bun run build:activities",
     "build:workflows": "bun run --cwd packages/workflows build",
-    "build:activities": "bun run --filter 'packages/activities/*' build",
+    "build:activities": "bun run --filter '@obelisk-demo/*-activities' build",
     "clean": "bun run --filter '*' clean",
     "typecheck": "tsc --build",
     "dev": "bun run --watch build"
@@ -19,6 +19,6 @@
     "@bytecodealliance/componentize-js": "^0.10.2",
     "@bytecodealliance/jco": "^1.4.0",
     "@types/bun": "latest",
-    "typescript": "^5.7.2"
+    "typescript": "^5.9.3"
   }
 }
